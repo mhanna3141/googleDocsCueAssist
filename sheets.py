@@ -50,7 +50,7 @@ for i in documentContent:
             if element['textRun']['content'] == "\n":
 
                 # add the sub number
-                cueInfoChunk += "subNum: " + str(index) + "\n"
+                cueInfoChunk += "\nsubNum: " + str(index)
 
                 # light cue
                 if "Lights:" in cueInfoChunk:
@@ -106,13 +106,13 @@ def changeCue(goForward, other):
     # want to go forward
     if goForward:
         cueIndex += 1
-        newCueString = allCueNumbers[cueIndex]
+        newCueString = allCues[allCueNumbers[cueIndex]]
 
     # want to go back
     else:
 
         cueIndex -= 1
-        newCueString = allCueNumbers[cueIndex]
+        newCueString = allCues[allCueNumbers[cueIndex]]
 
     cueLabel['text'] = newCueString
 
@@ -130,6 +130,7 @@ cueLabel = tk.Label(master=mainFrame, text=allCues[allCueNumbers[cueIndex]])
 
 root.bind('<Left>', partial(changeCue, False))
 root.bind('<Right>', partial(changeCue, True))
+root.bind('n', partial(changeCue, True))
 root.bind('f', findCue)
 cueLabel.pack()
 root.mainloop()
